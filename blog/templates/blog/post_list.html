@@ -1,23 +1,13 @@
-<html>
-    <head>
-        <title>Anastasia blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Anastasia blog</a></h1>
-        </div>
+{% extends 'blog/base.html' %}
 
-        {% for post in posts %}
-            <div>
-                <p>published: {{ post.published_date }}</p>
-                <h1><a href="">{{ post.title }}</a></h`2`>
-                <p>{{ post.text|linebreaksbr }}</p>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
             </div>
-        {% endfor %}
-            <div>
-                <p>published: 3.11.2016, 12.23</p>
-                <h2><a href="">Post 2</a></h2>
-                <p>Щоб зрозуміти для чого насправді розроблений Django, потрібно ближче розглянути роботу серверу. Першочергово сервер повинен знати про те, що ви бажаєте щоб він обслуговував ваш сайт. Уявіть собі поштову скриньку (порт), котра моніториться на вхідні листи (запити). Це здійснюється веб сервером. Веб сервер читає листа і відсилає відповідь із веб-сторінкою. Але коли ви бажаєте відправити дещо, вам потрібно мати деякий вміст. І Django є інструментом, котрий допомагає вам створити цей контент.</p>
-            </div>
-    </body>
-</html>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
